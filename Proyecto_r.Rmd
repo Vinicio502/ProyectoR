@@ -2,6 +2,7 @@
 
 
 ```{r}
+library("tidyverse")
 library("dplyr")
 
 yearly <- read.csv("deaths_handwashing.csv")
