@@ -1,0 +1,10 @@
+1.) CONOCIENDO LOS DATOS    
+
+
+```{r}
+library("dplyr")
+
+yearly <- read.csv("deaths_handwashing.csv")
+yearly
+```
+
