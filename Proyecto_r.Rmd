@@ -5,7 +5,32 @@
 library("tidyverse")
 library("dplyr")
 
-yearly <- read.csv("deaths_handwashing.csv")
+yearly <- read_csv('deaths_handwashing.csv')
 yearly
+```
+2.)USANDO MUTATE PARA AGREGAR LA COLUMNA PROPORTION_DEATHS A YEARLY, ESTA NUEVA COLUMNA CALCULARA COMO LA PROPORCION DE MUERTRE POR NUERO DE NACIMIENTOS
+
+```{r}
+yearly %>%
+  mutate(proportion_deaths = deaths/births)
+yearly
+```
+3.) UTILICE GGPLOT PARA HACER UNA GRAFICA LINEAL DE PROPORTION_DEATHS POR AÑO (COLUMNA YEAR) CON UNA LINEA POR CLINICA
+
+```{r}
+ggplot(yearly, aes(x=year, y=deaths/births, color = clinic)) + 
+  geom_line()+
+  scale_x_log10()
+```
+4.) CARGUE LOS DATOS MENSUALES DE LA CLINICA 1 PARA VER SI EL LAVADO DE MANOS TUVO ALGUN EFECTO, PARTE ESTO LEA EL ARCHIVO DEATSH_CLINIC_1.CSV Y ASIGNELO A LA VARIABLE MONTHLY.
+AGREGUE LA COLUMNA PROPORTION_DEATHS A MONTHLY, ESTA NUEVA COLUMNA SE CALCULARA COMO LA PROPORCION DE MUERTES POR NUMERO DE NACIMIENTOS.
+IMPRIMA LAS PRIMERAS FILAS DE MONTHLY USANDO FUNCION HEAD()
+
+```{r}
+monthly <- read_csv('deaths_clinic_1.csv')
+monthly
+
+monthly <- mutate(monthly, proportion_deaths = deaths/births)
+head(monthly)
 ```
 
