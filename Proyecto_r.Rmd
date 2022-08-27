@@ -11,14 +11,13 @@ yearly
 2.)USANDO MUTATE PARA AGREGAR LA COLUMNA PROPORTION_DEATHS A YEARLY, ESTA NUEVA COLUMNA CALCULARA COMO LA PROPORCION DE MUERTRE POR NUERO DE NACIMIENTOS
 
 ```{r}
-yearly %>%
-  mutate(proportion_deaths = deaths/births)
+yearly <- mutate(yearly,proportion_deaths = deaths/births)
 yearly
 ```
 3.) UTILICE GGPLOT PARA HACER UNA GRAFICA LINEAL DE PROPORTION_DEATHS POR AÑO (COLUMNA YEAR) CON UNA LINEA POR CLINICA
 
 ```{r}
-ggplot(yearly, aes(x=year, y=deaths/births, color = clinic)) + 
+ggplot(yearly, aes(x=year, y=proportion_deaths, color = clinic)) + 
   geom_line()+
   scale_x_log10()
 ```
@@ -32,5 +31,17 @@ monthly
 
 monthly <- mutate(monthly, proportion_deaths = deaths/births)
 head(monthly)
+```
+
+5.1)HAGA UNA GRAFICA LINEAL DE PROPORTION_DEATHS POR FECHA PARA EL DATA FRAME MONTHLY USANDO GGPLOT
+
+```{r}
+ggplot(monthly, aes(x=date, y=proportion_deaths)) + 
+  geom_line()
+```
+5.2) UTILIZANDO LA FUNCION LABS PARA DR AL EJE X Y AL EJE Y UNA ESTETICA A LAS ETIQUETAS
+
+```{r}
+
 ```
 
