@@ -42,6 +42,30 @@ ggplot(monthly, aes(x=date, y=proportion_deaths)) +
 5.2) UTILIZANDO LA FUNCION LABS PARA DR AL EJE X Y AL EJE Y UNA ESTETICA A LAS ETIQUETAS
 
 ```{r}
+ggplot(monthly, aes(x=date, y=proportion_deaths)) + 
+  geom_line() +
+  labs(x = "Date", y = "Proportion_deaths", colour = "Species")
+
+```
+5.3)  USAR group_by y summarise para encontrar la media por año y guardarlo en el datase death_by_year
+```{r}
+yearly %>%
+  group_by(year) %>%
+  summarise(death_by_year = mean(proportion_deaths))
+```
+
+5.4) UTILIZAR EL CONJUNTO DE DATOS death_by_year para crear un grafico de barras que muestra la media en cada año
+```{r}
+yearly %>%
+  ggplot(yearly, aes(x=year, y=death_by_year))
+  geom_col()
+
+```
+6.)Agregue una columna TRUE/FALSE a monthly llamado handwashing_started, que será
+TRUE a partir del año en que se impuso el lavado de manos.
+```{r}
+monthly %>%
+  mutate(monthly, handswashing_started = ifelse(date < 1847, FALSE, TRUE))
 
 ```
 
