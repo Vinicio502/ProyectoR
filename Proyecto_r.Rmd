@@ -61,11 +61,35 @@ yearly %>%
   geom_col()
 
 ```
-6.)Agregue una columna TRUE/FALSE a monthly llamado handwashing_started, que será
+6.1)Agregue una columna TRUE/FALSE a monthly llamado handwashing_started, que será
 TRUE a partir del año en que se impuso el lavado de manos.
 ```{r}
 monthly %>%
-  mutate(monthly, handswashing_started = ifelse(date < 1847, FALSE, TRUE))
+  mutate(handwashing_started = date >= "1847-01-01")
 
+```
+6.2) Haga una gráfica lineal de proportion_deaths por fecha para el data frame monthly
+usando ggplot. Haga que el color de la línea dependa de handwashing_started.
+```{r}
+
+ggplot(monthly, aes(x=date, y=proportion_deaths)) + 
+  geom_line()
+
+```
+
+6.3) Utilice la función labs para dar al eje x y al eje y una estética a las etiquetas.
+```{r}
+ggplot(monthly, aes(x=date, y=proportion_deaths)) + 
+  geom_line() +
+  labs(x = "Date", y = "Proportion_deaths", colour = "Species")
+
+```
+7.1.) Utilice group_by y summarise para calcular el promedio de proportion_deaths antes y
+después de que se impusiera el lavado de manos.
+7.2) Asigne el resultado en la variable month_summary e imprímala.
+```{r}
+monthly %>%
+  group_by(date, mutate(handwashing_started = date >= "1847-01-01")) %>%
+  summarise(mean_proportion_deaths = mean(proportion_deaths))
 ```
 
